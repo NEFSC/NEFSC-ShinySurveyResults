@@ -1,0 +1,116 @@
+# Shiny Group Survey Results
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+dat<- read.csv(here::here("R _ RShiny  Survey (Responses) - Form Responses 1.csv"))
+library(tidyverse)
+
+dat2<-dat %>% 
+  mutate(Branch = recode(Branch, 
+                         "Population Biology Branch" = "PBB", 
+                         "Population Dynamics Branch" = "PDB", 
+                         "Cooperative Research" = "CRB", 
+                         "Population Dynamics" = "PDB", 
+                         "PopDy" = "PDB", 
+                         "READ-EDAB" = "EDAB", 
+                         "Protected Species Branch" = "PSB", 
+                         "Habitat Ecology Branch" = "HEB", 
+                         "Data and Information Systems" = "DIS FMRD", 
+                         "READ/PDB" = "PDB", 
+                         "Population dynamics" = "PDB", 
+                         "Cooperative Research Branch" = "CRB", 
+                         "Cooperative Research Branch " = "CRB",
+                         "Social Sciences Branch " = "SSB", 
+                         "Social Sciences Branch" = "SSB",
+                         "Habitat Ecology" = "HEB", 
+                         "DIS FMRD" = "DIS" 
+                         )) %>% 
+  rename("R_users" = "What.programming.software.do.you.use..and.how.often...R.", 
+         "Py_users" = "What.programming.software.do.you.use..and.how.often...Python.", 
+         "Mat_users" = "What.programming.software.do.you.use..and.how.often...Matlab.", 
+         "IDL_users" = "What.programming.software.do.you.use..and.how.often...IDL.", 
+         "SAS_users" = "What.programming.software.do.you.use..and.how.often...SAS." , 
+         "Cpp_users" = "What.programming.software.do.you.use..and.how.often...C...", 
+         "StatisticalAnalysis" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Statistics.Data.Analysis.", 
+         "Reporting" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Reporting." , 
+         "DataQAQC" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Data.QA.QC." , 
+         "Wrangling" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Data.Wrangling.Manipulation.", 
+         "Visualization" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Data.Visualization." , 
+         "Advanced_tools" = "Do.you.use.any.of.the.following.advanced.tools.in.RStudio.", 
+         "N_Shiny_users" = "Do.you.develop.Shiny.applications.in.R.or.are.you.interested.in.learning.more.about.Shiny.", 
+         "Time_server_vs_local" = "How.much.time.do.you.spend.working.in.R.on.a.NEFSC.server.vs.working.on.your.local.machine.", 
+         "shiny_obstacles" = "If.you.are.interested.in.creating.using.a.Shiny.app..but.haven.t.been.able.to.implement.one..what.challenges.are.you.facing..", 
+         "Public_products" = "Do.you.have.projects.that.would.benefit.from.a.public.facing.Shiny.server." 
+         
+         
+         )
+
+
+
+```
+
+These are the results from the shiny survey conducted June 2021. This survey asked folks from the Northeast Fisheries Science Center how they use R and Shiny for their work in the hopes to better understand common roadblocks and help to identify areas where we can further support the R and RShiny communities at the Center. 
+
+This survey recieved `r length(unique(dat2$Name))` responses from `r length(unique(dat2$Branch))` branches. 
+
+
+```{r,echo = FALSE, message = FALSE, warning=FALSE}
+
+
+dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_users) %>% 
+  tidyr::pivot_longer(.,cols = c(R_users, Py_users,  Mat_users, IDL_users, SAS_users, Cpp_users), names_to = "Var", values_to = "Category") %>% 
+  mutate(Value = c(1)) %>% 
+  group_by(Var, Category) %>% 
+  summarise(Value = sum(Value)) %>% 
+  ungroup() %>% 
+  mutate(Category = recode(Category, 
+                           "This is the language I use the most" = "Most", 
+                           "I sometimes use this, This is the language I use the most" = "Most",
+                           "I sometimes use this" = "Sometimes",
+                           "Maybe once or twice" = "Rarely",
+                           "I don't use this" = "Never", 
+                           "I don't use this, Maybe once or twice" = "Never")) %>% 
+  filter(!Category == "", 
+         !Category == "Never") %>% 
+  mutate(Category = factor(Category, levels = c( "Rarely", "Sometimes","Most"))) %>% 
+  ggplot2::ggplot()+
+  ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("Number of Software Users")+
+  ggplot2::ylab(element_blank())+
+  ggplot2::xlab("Number of Survey Participants")+
+  ecodata::theme_ts()
+
+```
+
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visualization) %>% 
+  tidyr::pivot_longer(.,cols = c(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visualization), names_to = "Var", values_to = "Category") %>% 
+  mutate(Value = c(1)) %>% 
+  group_by(Var, Category) %>% 
+  summarise(Value = sum(Value)) %>% 
+  ungroup() %>% 
+  #mutate(Category = recode(Category, 
+                           # "This is the language I use the most" = "Most", 
+                           # "I sometimes use this, This is the language I use the most" = "Most",
+                           # "I sometimes use this" = "Sometimes",
+                           # "Maybe once or twice" = "Rarely",
+                           # "I don't use this" = "Never", 
+                           # "I don't use this, Maybe once or twice" = "Never")) %>% 
+  filter(!Category == "", 
+         !Category == "Never", 
+         !Category == "Not sure") %>% 
+  mutate(Category = factor(Category, levels = c("I would if I knew how", "Occasionally", "Often","Regularly" ))) %>% 
+  ggplot2::ggplot()+
+  ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("How are folks using R")+
+  ggplot2::ylab(element_blank())+
+  ggplot2::xlab("Number of Survey Participants")+
+  ecodata::theme_ts()
+
+```
+
+
+
+
+
+
