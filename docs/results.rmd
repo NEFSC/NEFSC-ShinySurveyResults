@@ -36,7 +36,7 @@ dat2<-dat %>%
          "Wrangling" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Data.Wrangling.Manipulation.", 
          "Visualization" = "In.what.capacity.do.you.use.R.as.a.part.of.your.work...Data.Visualization." , 
          "Advanced_tools" = "Do.you.use.any.of.the.following.advanced.tools.in.RStudio.", 
-         "N_Shiny_users" = "Do.you.develop.Shiny.applications.in.R.or.are.you.interested.in.learning.more.about.Shiny.", 
+         "N_shiny_users" = "Do.you.develop.Shiny.applications.in.R.or.are.you.interested.in.learning.more.about.Shiny.", 
          "Time_server_vs_local" = "How.much.time.do.you.spend.working.in.R.on.a.NEFSC.server.vs.working.on.your.local.machine.", 
          "shiny_obstacles" = "If.you.are.interested.in.creating.using.a.Shiny.app..but.haven.t.been.able.to.implement.one..what.challenges.are.you.facing..", 
          "Public_products" = "Do.you.have.projects.that.would.benefit.from.a.public.facing.Shiny.server." 
@@ -110,7 +110,84 @@ dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visu
 ```
 
 
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat4<- dat2 %>% 
+  select(N_shiny_users) %>% 
+    mutate(N_shiny_users = recode(N_shiny_users, 
+                           "This is the language I use the most" = "Yes I am interested in learning more about Shiny apps", 
+                           "I do not use, but have a general interest in it" = "Yes I am interested in learning more about Shiny apps",
+                           "mildly interested - not sure I have a need for Shiny, but very open to it" = "Yes I am interested in learning more about Shiny apps",
+                           "Unsure if I have a use for building Shiny Apps. I would have to learn more about it." = "Yes I am interested in learning more about Shiny apps",
+                           "Yes I am interested in learning more about Shiny apps, Yes, I realize the value of Shiny apps. Any tips on switching from one language to another (I am a Stata user)?" = "Yes I am interested in learning more about Shiny apps", 
+                           "Don't use it currently, but interested in how the center is using it" = "Yes I am interested in learning more about Shiny apps", 
+                           "Yes I build Shiny apps, Yes I am interested in learning more about Shiny apps" = "Yes I am interested in learning more about Shiny apps")) %>% 
+  mutate(Value = c(1)) %>% 
+  group_by(N_shiny_users) %>% 
+  summarise(Value = sum(Value)) %>% 
+  ungroup() %>% 
+  mutate(Perc = Value/sum(Value) *100)
+
+dat4 %>% 
+  ggplot2::ggplot()+
+  ggplot2::geom_col(aes(y = N_shiny_users, x = Perc))+
+  ggplot2::ggtitle("Interest in shiny at the center")+
+  ggplot2::ylab(element_blank())+
+  ggplot2::xlab("Percent of Survey Participants")+
+  ecodata::theme_ts()
+```
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat5<- dat2 %>% 
+  select(shiny_obstacles) %>% 
+  separate(shiny_obstacles, into = c("a", "b", "c", "d"), sep = ",") 
+
+a<- dat5 %>% 
+  select(a) %>% 
+  rename( "col" = a)
+b<- dat5 %>% 
+  select(b) %>% 
+  rename( "col" = b)
+c<- dat5 %>% 
+  select(c) %>% 
+  rename( "col" = c)
+d<- dat5 %>% 
+  select(d) %>% 
+  rename( "col" = d)
+
+dat5<- rbind(a,b,c,d) %>% 
+    filter(!col == "", 
+         !col == "NA")%>% 
+  mutate(col = recode(col, 
+                      "Somewhat more positively: I wish I had time to learn another new thing" = "Time Constraints", 
+                      "Don't have time to learn another new thing" = "Time Constraints", 
+                      " Don't have time to learn another new thing" = "Time Constraints",
+                      " Time constraints are an issue too" = "Time Constraints", 
+                      "Don't have the time/full data yet " = "Time Constraints", 
+                      " My work needs to be available to collaborators outside of the Center" = "Needs public access", 
+                      "My work needs to be available to collaborators outside of the Center" = "Needs public access",
+                      " Lack of know how" = "Lack of know how", 
+                      " Data confidentiality issues" = "Data confidentiality issues", 
+                      "Don't know how to share my app internally on the server" = "Lack of server know how", 
+                      " Don't know how to share my app internally on the server" = "Lack of server know how"
+                      )) %>% 
+  filter(!col == " but would like to try.") %>% 
+  dplyr::mutate(Value = c(1)) %>% 
+  group_by(col) %>% 
+  summarise(Value = sum(Value)) %>% 
+  ungroup() %>% 
+  mutate(Perc = Value/sum(Value) *100)
+dat5 %>% 
+  ggplot2::ggplot()+
+  ggplot2::geom_col(aes(y = col, x = Perc))+
+  ggplot2::ggtitle("Shiny Obstacles")+
+  ggplot2::ylab(element_blank())+
+  ggplot2::xlab("Percent of Survey Participants")+
+  ecodata::theme_ts()
+
+```
+
+```{r}
 
 
-
+```
 
