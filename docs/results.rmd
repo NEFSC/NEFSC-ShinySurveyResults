@@ -22,7 +22,8 @@ dat2<-dat %>%
                          "Social Sciences Branch " = "SSB", 
                          "Social Sciences Branch" = "SSB",
                          "Habitat Ecology" = "HEB", 
-                         "DIS FMRD" = "DIS" 
+                         "DIS FMRD" = "DIS", 
+                         "Protected Species" = "PSB"
                          )) %>% 
   rename("R_users" = "What.programming.software.do.you.use..and.how.often...R.", 
          "Py_users" = "What.programming.software.do.you.use..and.how.often...Python.", 
@@ -39,9 +40,15 @@ dat2<-dat %>%
          "N_shiny_users" = "Do.you.develop.Shiny.applications.in.R.or.are.you.interested.in.learning.more.about.Shiny.", 
          "Time_server_vs_local" = "How.much.time.do.you.spend.working.in.R.on.a.NEFSC.server.vs.working.on.your.local.machine.", 
          "shiny_obstacles" = "If.you.are.interested.in.creating.using.a.Shiny.app..but.haven.t.been.able.to.implement.one..what.challenges.are.you.facing..", 
-         "Public_products" = "Do.you.have.projects.that.would.benefit.from.a.public.facing.Shiny.server." 
-         
-         
+         "Public_products" = "Do.you.have.projects.that.would.benefit.from.a.public.facing.Shiny.server." , 
+         "RstudioConnect" = "Would.RStudio.Connect.be.useful.for.any.of.your.projects.", 
+         "server_vs_connect" =  "Would.you.be.most.interested.in.", 
+         "rbasic" = "Would.you.be.interested.in.participating.in.trainings...R.basics.", 
+         "shiny" = "Would.you.be.interested.in.participating.in.trainings...Shiny.", 
+         "shinyserver" = "Would.you.be.interested.in.participating.in.trainings...Shiny.on.the.server.", 
+         "rstudioconnect" = "Would.you.be.interested.in.participating.in.trainings...RStudio.Connect." , 
+         "rforreporting" = "Would.you.be.interested.in.participating.in.trainings...R.for.reporting.",
+         "other" = "Would.you.be.interested.in.participating.in.trainings...Other.RStudio.advanced.tools..RMarkdown..etc..."
          )
 
 
@@ -52,6 +59,9 @@ These are the results from the shiny survey conducted June 2021. This survey ask
 
 This survey recieved `r length(unique(dat2$Name))` responses from `r length(unique(dat2$Branch))` branches. 
 
+### Data Summary {.tabset .tabset-fade}
+
+#### Software Usage 
 
 ```{r,echo = FALSE, message = FALSE, warning=FALSE}
 
@@ -62,6 +72,7 @@ dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_u
   group_by(Var, Category) %>% 
   summarise(Value = sum(Value)) %>% 
   ungroup() %>% 
+
   mutate(Category = recode(Category, 
                            "This is the language I use the most" = "Most", 
                            "I sometimes use this, This is the language I use the most" = "Most",
@@ -72,15 +83,21 @@ dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_u
   filter(!Category == "", 
          !Category == "Never") %>% 
   mutate(Category = factor(Category, levels = c( "Rarely", "Sometimes","Most"))) %>% 
+    group_by(Var) %>% 
+  mutate(total = sum(Value), 
+         perc = (Value/total *100)) %>% 
+  ungroup() %>% 
   ggplot2::ggplot()+
   ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
   ggplot2::ggtitle("Number of Software Users")+
   ggplot2::ylab(element_blank())+
   ggplot2::xlab("Number of Survey Participants")+
+  ggplot2::theme(legend.title = element_blank()) +
   ecodata::theme_ts()
 
 ```
 
+#### R Usage
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visualization) %>% 
@@ -105,10 +122,11 @@ dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visu
   ggplot2::ggtitle("How are folks using R")+
   ggplot2::ylab(element_blank())+
   ggplot2::xlab("Number of Survey Participants")+
+  ggplot2::theme(legend.title = element_blank()) +
   ecodata::theme_ts()
-
 ```
 
+#### Shiny Interest
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 dat4<- dat2 %>% 
@@ -133,8 +151,11 @@ dat4 %>%
   ggplot2::ggtitle("Interest in shiny at the center")+
   ggplot2::ylab(element_blank())+
   ggplot2::xlab("Percent of Survey Participants")+
+  ggplot2::theme(legend.title = element_blank()) +
   ecodata::theme_ts()
 ```
+
+#### Shiny Obstacles
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE}
 dat5<- dat2 %>% 
@@ -165,7 +186,7 @@ dat5<- rbind(a,b,c,d) %>%
                       "Don't have the time/full data yet " = "Time Constraints", 
                       " My work needs to be available to collaborators outside of the Center" = "Needs public access", 
                       "My work needs to be available to collaborators outside of the Center" = "Needs public access",
-                      " Lack of know how" = "Lack of know how", 
+                      " Lack of know how" = "Lack of shiny know how", 
                       " Data confidentiality issues" = "Data confidentiality issues", 
                       "Don't know how to share my app internally on the server" = "Lack of server know how", 
                       " Don't know how to share my app internally on the server" = "Lack of server know how"
@@ -182,12 +203,191 @@ dat5 %>%
   ggplot2::ggtitle("Shiny Obstacles")+
   ggplot2::ylab(element_blank())+
   ggplot2::xlab("Percent of Survey Participants")+
+  ggplot2::theme(legend.title = element_blank()) +
   ecodata::theme_ts()
 
 ```
 
-```{r}
+#### Work local vs server
 
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+
+
+dat5<- dat2 %>% 
+  select(Time_server_vs_local) %>% 
+  filter(!Time_server_vs_local == "") %>% 
+  mutate(N = c(1)) %>% 
+  group_by(Time_server_vs_local) %>% 
+  summarise(N = sum(N)) %>% 
+  ungroup() %>% 
+  mutate(perc = N/sum(N)*100, 
+         other = c("1")) %>% 
+  mutate(Time = factor(Time_server_vs_local, 
+  levels = c( "100% server","60% - 80% server","40% - 60% server",
+              "20% - 40% server","Less than 20% on the sever","100% locally"))) 
+
+dat5 %>% ggplot2::ggplot()+
+   ggplot2::geom_col(aes(x = other, y = perc, fill = Time))+
+  #  ggplot2::ggplot()+
+  #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("Time spent working on server")+
+  ggplot2::ylab("Percent of work")+
+    ggplot2::geom_text(aes(x = other, y = perc, fill =  Time, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5))+
+  ggplot2::xlab(element_blank())+
+  ggplot2::theme(legend.title = element_blank(), 
+                 axis.text.x=element_blank()) +
+  ggplot2::scale_fill_brewer()+
+  ecodata::theme_ts()
 
 ```
 
+#### Ideas for public facing server
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat6<- dat2 %>% 
+  select(Public_products) %>% 
+  filter(!Public_products == "") %>% 
+  mutate(N = c(1)) %>% 
+  group_by(Public_products) %>% 
+  summarise(N = sum(N)) %>% 
+  ungroup() %>% 
+  mutate(perc = N/sum(N)*100, 
+         other = c("1"))# %>% 
+  #mutate(Time = factor(Time_server_vs_local, 
+  #levels = c( "100% server","60% - 80% server","40% - 60% server",
+  #            "20% - 40% server","Less than 20% on the sever","100% locally"))) 
+
+dat6 %>% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+
+   ggplot2::geom_bar(stat = "identity", width = 1,color="white")+
+  ggplot2::coord_polar("y", start = 0)+
+  #  ggplot2::ggplot()+
+  #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("Would your benefit from a public facing shiny server?")+
+  ggplot2::ylab(element_blank())+
+  ggplot2::xlab(element_blank())+
+  #ggplot2::geom_text(aes(x = other, y = perc, fill = Public_products, label = paste0(round(perc),"%")), 
+  #      position = position_stack(vjust = 0.5))+
+
+  theme_void()+
+  ggplot2::geom_text(aes(x = "", y = N, fill = Public_products, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5), 
+        color = "white")+
+    ggplot2::theme(legend.title = element_blank()) +
+  ecodata::theme_ts()
+
+
+
+
+dat2 %>% 
+  select(If.yes..please.expand) %>% 
+  filter(!If.yes..please.expand == "") %>%
+  rename("Project Ideas"="If.yes..please.expand") %>% 
+ # mutate(N = c(1:length(If.yes..please.expand))) %>% 
+  kableExtra::kbl() %>% 
+  kableExtra::kable_styling()
+
+```
+
+#### Interest in RStudio Connect
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat7<- dat2 %>% 
+  select(RstudioConnect) %>% 
+  filter(!RstudioConnect == "") %>% 
+  mutate(N = c(1)) %>% 
+  group_by(RstudioConnect) %>% 
+  summarise(N = sum(N)) %>% 
+  ungroup() %>% 
+  mutate(perc = N/sum(N)*100, 
+         other = c("1"))# %>% 
+  #mutate(Time = factor(Time_server_vs_local, 
+  #levels = c( "100% server","60% - 80% server","40% - 60% server",
+  #            "20% - 40% server","Less than 20% on the sever","100% locally"))) 
+
+dat7 %>% ggplot2::ggplot()+
+   ggplot2::geom_col(aes(x = other, y = perc, fill = RstudioConnect))+
+  #  ggplot2::ggplot()+
+  #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("Would RStudio Connect be useful for your work?")+
+  ggplot2::ylab("Percent of participants")+
+  ggplot2::xlab(element_blank())+
+  ggplot2::geom_text(aes(x = other, y = perc, fill = RstudioConnect, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5))+
+  ggplot2::theme(legend.title = element_blank(),
+                 axis.text.x=element_blank()) +
+  ecodata::theme_ts()
+
+```
+
+#### Connect vs Server
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat8<- dat2 %>% 
+  select(server_vs_connect) %>% 
+  filter(!server_vs_connect == "", 
+         !server_vs_connect == "expanding my ability to use R so that I could assess if it would be useful in producing my deliverables", 
+         !server_vs_connect == "I am at a more basic level and need to carve the time to learn", 
+         !server_vs_connect == "internal shiny server") %>% 
+  mutate(N = c(1)) %>% 
+  group_by(server_vs_connect) %>% 
+  summarise(N = sum(N)) %>% 
+  ungroup() %>% 
+  mutate(perc = N/sum(N)*100, 
+         other = c("1"))# %>% 
+  #mutate(Time = factor(Time_server_vs_local, 
+  #levels = c( "100% server","60% - 80% server","40% - 60% server",
+  #            "20% - 40% server","Less than 20% on the sever","100% locally"))) 
+
+dat8 %>% ggplot2::ggplot()+
+   ggplot2::geom_col(aes(x = other, y = perc, fill = server_vs_connect))+
+  #  ggplot2::ggplot()+
+  #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
+  ggplot2::ggtitle("RStudio Connect vs Public facing shiny sevrer")+
+  ggplot2::ylab("Percent of participants")+
+  ggplot2::xlab(element_blank())+
+  ggplot2::geom_text(aes(x = other, y = perc, fill = server_vs_connect, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5))+
+  ggplot2::theme(legend.title = element_blank(), 
+                 axis.text.x=element_blank()) +
+  ecodata::theme_ts()
+
+```
+
+#### Training Interests
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE}
+dat9<-dat2 %>% dplyr::select(rbasic, shiny, shinyserver, rstudioconnect, rforreporting, other) %>% 
+  tidyr::pivot_longer(.,cols = c(rbasic, shiny, shinyserver, rstudioconnect, rforreporting, other), names_to = "Var", values_to = "Category") %>% 
+  filter(!Category == "Interested, I might join", 
+         !Category == "") %>% 
+  mutate(Value = c(1)) %>% 
+  group_by(Var, Category) %>% 
+  summarise(Value = sum(Value)) %>% 
+  ungroup() %>% 
+  # mutate(Category = recode(Category, 
+  #                          "This is the language I use the most" = "Most", 
+  #                          "I sometimes use this, This is the language I use the most" = "Most",
+  #                          "I sometimes use this" = "Sometimes",
+  #                          "Maybe once or twice" = "Rarely",
+  #                          "I don't use this" = "Never", 
+  #                          "I don't use this, Maybe once or twice" = "Never")) %>% 
+   
+  #       !Category == "Never") %>% 
+  mutate(Category = factor(Category, 
+                           levels = c( "No Thanks", "I might join",
+                                        "Interested","Super Interested" ))) %>% 
+  group_by(Var) %>% 
+  mutate(total = sum(Value), 
+         perc = (Value/total *100)) %>% 
+  ungroup()
+dat9 %>%   ggplot2::ggplot()+
+  ggplot2::geom_col(aes( x = Var, y = perc,  fill = Category))+
+  ggplot2::ggtitle("Would you be interested in participating in trainings?")+
+  ggplot2::ylab("Percent of participants")+
+  ggplot2::geom_text(aes(x = Var, y = perc, fill =  Category, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5))+
+  ggplot2::xlab(element_blank())+
+  ggplot2::theme(legend.title = element_blank()) +
+  ecodata::theme_ts()
+```
