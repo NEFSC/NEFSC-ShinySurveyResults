@@ -23,7 +23,15 @@ dat2<-dat %>%
                          "Social Sciences Branch" = "SSB",
                          "Habitat Ecology" = "HEB", 
                          "DIS FMRD" = "DIS", 
-                         "Protected Species" = "PSB"
+                         "Protected Species" = "PSB", 
+                         "DIS FMRD" = "DIS", 
+                         "Aquaculture Sustainability Branch" = "ASB", 
+                         "Atlantic Salmon Ecosystems Research Team" = "PSB", 
+                         "Training and Data Quality Branch"  = "TDQB", 
+                         "Project Management" = "ITD", 
+                         "FMRD-FMO" = "FMO", 
+                         "FMRD/DIS" = "DIS", 
+                         "EAD/AS" = "ASB"
                          )) %>% 
   rename("R_users" = "What.programming.software.do.you.use..and.how.often...R.", 
          "Py_users" = "What.programming.software.do.you.use..and.how.often...Python.", 
@@ -58,6 +66,10 @@ dat2<-dat %>%
 These are the results from the shiny survey conducted June 2021. This survey asked folks from the Northeast Fisheries Science Center how they use R and Shiny for their work in the hopes to better understand common roadblocks and help to identify areas where we can further support the R and RShiny communities at the Center. 
 
 This survey recieved `r length(unique(dat2$Name))` responses from `r length(unique(dat2$Branch))` branches. 
+
+```{r,echo = FALSE, message = FALSE, warning=FALSE}
+#unique(dat2$Branch)
+```
 
 ### Data Summary {.tabset .tabset-fade}
 
