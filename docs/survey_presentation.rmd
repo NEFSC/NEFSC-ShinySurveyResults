@@ -173,9 +173,9 @@ background-position: right
 
 ### Which Divisions/Branches participated in the survey?
 
-```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "75%"}
-knitr::include_graphics("EDAB_images/DivisionPie.png")
-knitr::include_graphics("EDAB_images/READBranchPie.png")
+```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "50%"}
+knitr::include_graphics("EDAB_images/DivisionPie.jpg")
+knitr::include_graphics("EDAB_images/READBranchPie.jpg")
 ```
 
 ---
