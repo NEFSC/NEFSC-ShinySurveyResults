@@ -171,6 +171,20 @@ background-position: right
 
 ## Survey Findings
 
+### Which Divisions/Branches participated in the survey?
+
+```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "75%"}
+knitr::include_graphics("EDAB_images/DivisionPie.png")
+knitr::include_graphics("EDAB_images/READBranchPie.png")
+```
+
+---
+background-image: url("EDAB_images/background4.png")
+background-size: 1200px 
+background-position: right
+
+## Survey Findings
+
 ### Programming software in use @NEFSC
 
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "75%"}
