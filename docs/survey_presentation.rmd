@@ -269,6 +269,7 @@ dat6 %>% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+
 ```
 
 ---
+
 background-image: url("EDAB_images/Shiny_Ideas1.png")
 background-size: 1000px 
 background-position: center
@@ -278,6 +279,7 @@ background-position: center
 
 
 ---
+
 background-image: url("EDAB_images/Shiny_Ideas2.png")
 background-size: 1000px 
 background-position: center
@@ -285,6 +287,7 @@ background-position: center
 ## Shiny Ideas
 
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
