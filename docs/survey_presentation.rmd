@@ -126,6 +126,7 @@ background-position: right
 ## Survey Findings
 
 ### This survey recieved `r length(unique(dat2$Name))` responses from `r length(unique(dat2$Branch))` branches. 
+- Lots of R users at the center 
 
 
 ```{r,echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
@@ -268,9 +269,10 @@ dat6 %>% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+
   ecodata::theme_ts()
 ```
 
+
 ---
 
-background-image: url("docs/EDAB_images/Shiny_Ideas1.png")
+background-image: url("EDAB_images/Shiny_Ideas1.png")
 background-size: 1000px 
 background-position: center
 
