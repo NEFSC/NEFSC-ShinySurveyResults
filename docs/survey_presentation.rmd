@@ -254,7 +254,7 @@ dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visu
 - Some already underway*
 
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
-knitr::include_graphics("EDAB_images/Shiny_Ideas1.png")
+knitr::include_graphics("EDAB_images/Shiny_Ideas1.PNG")
 ```
 
 ---
@@ -266,7 +266,7 @@ knitr::include_graphics("EDAB_images/Shiny_Ideas1.png")
 - Some already underway*
 
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
-knitr::include_graphics("EDAB_images/Shiny_Ideas2.png")
+knitr::include_graphics("EDAB_images/Shiny_Ideas2.PNG")
 ```
 
 ---
