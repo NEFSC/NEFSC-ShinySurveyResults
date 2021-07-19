@@ -125,9 +125,8 @@ background-position: right
 
 ## Survey Findings
 
-### This survey recieved `r length(unique(dat2$Name))` responses from `r length(unique(dat2$Branch))` branches. 
-- Lots of R users at the center 
-
+### This survey recieved `r length(unique(dat2$Name))` responses from 16 different NEFSC Branches. 
+- Lots of R users at the center.
 
 ```{r,echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
 order<- c("R_users", "SAS_users", "Py_users", "Mat_users", "Cpp_users", "IDL_users")
@@ -158,12 +157,14 @@ dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_u
   ggplot2::ggtitle("Number of Software Users")+
   ggplot2::ylab(element_blank())+
   ggplot2::xlab("Number of Survey Participants")+
-  ggplot2::theme(legend.title = element_blank()) +
+  ggplot2::theme(legend.title = element_blank(), 
+                 legend.position = "bottom") +
   scale_x_continuous(n.breaks = 12,  expand = c(0,1))+
   #scale_x_continuous(breaks = round(seq(min(dat$x), max(dat$x), by = 0.5),1)
   ecodata::theme_ts()
 
 ```
+
 
 ---
 background-image: url("EDAB_images/background4.png")
@@ -174,7 +175,7 @@ background-position: right
 
 ### Which Divisions/Branches participated in the survey?
 
-```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "50%"}
+```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width="50%"}
 knitr::include_graphics("EDAB_images/DivisionPie.jpg")
 knitr::include_graphics("EDAB_images/READBranchPie.jpg")
 ```
@@ -212,7 +213,9 @@ background-position: right
 
 ## Survey Findings
 
-### How are folks currently using R 
+### Most folks using R for Stats, Data Wrangling and Visualization. 
+- Fewer folks using R for Reporting. 
+- This is reflected in training interests slide XX. 
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
 dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visualization) %>% 
@@ -241,78 +244,72 @@ dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visu
   ecodata::theme_ts()
 ```
 
----
-background-image: url("EDAB_images/background4.png")
-background-size: 1200px 
-background-position: right
 
-## Survey Findings
+---
+
+## Shiny Ideas
 
 ### Expanding NEFSC work with public shiny
-
-```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
-dat6<- dat2 %>% 
-  select(Public_products) %>% 
-  filter(!Public_products == "") %>% 
-  mutate(N = c(1)) %>% 
-  group_by(Public_products) %>% 
-  summarise(N = sum(N)) %>% 
-  ungroup() %>% 
-  mutate(perc = N/sum(N)*100, 
-         other = c("1"))# %>% 
-  #mutate(Time = factor(Time_server_vs_local, 
-  #levels = c( "100% server","60% - 80% server","40% - 60% server",
-  #            "20% - 40% server","Less than 20% on the sever","100% locally"))) 
-
-dat6 %>% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+
-   ggplot2::geom_bar(stat = "identity", width = 1,color="white")+
-  ggplot2::coord_polar("y", start = 0)+
-  #  ggplot2::ggplot()+
-  #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
-  ggplot2::ggtitle("Would your benefit from a public facing shiny server?")+
-  ggplot2::ylab(element_blank())+
-  ggplot2::xlab(element_blank())+
-  #ggplot2::geom_text(aes(x = other, y = perc, fill = Public_products, label = paste0(round(perc),"%")), 
-  #      position = position_stack(vjust = 0.5))+
-
-  theme_void()+
-  ggplot2::geom_text(aes(x = "", y = N, fill = Public_products, label = paste0(round(perc),"%")), 
-        position = position_stack(vjust = 0.5), 
-        color = "white")+
-    ggplot2::theme(legend.title = element_blank()) +
-  ecodata::theme_ts()
+- Lots of ideas for advancing NEFSC work 
+- Some already underway*
+```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
+knitr::include_graphics("EDAB_images/Shiny_Ideas1.png")
 ```
 
-
 ---
-
-background-image: url("EDAB_images/Shiny_Ideas1.png")
-background-size: 1000px 
-background-position: center
 
 ## Shiny Ideas
 
-
-
----
-
-background-image: url("EDAB_images/Shiny_Ideas2.png")
-background-size: 1000px 
-background-position: center
-
-## Shiny Ideas
-
+### Ideas that improve stakeholder engagement, science, and outreach.  
+- Some already underway*
+```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
+knitr::include_graphics("EDAB_images/Shiny_Ideas2.png")
+```
 ---
 
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
-## How to support this interest
+## How to support this interest: Public Shiny
 
-### Shiny vs RStudio Connect
+### **63%** of participants have work that would benefit from a public shiny instance.
+- Most survey participants would like more information about the options. 
 
-```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
+<!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.height= 5} -->
+<!-- dat6<- dat2 %>%  -->
+<!--   select(Public_products) %>%  -->
+<!--   filter(!Public_products == "") %>%  -->
+<!--   mutate(N = c(1)) %>%  -->
+<!--   group_by(Public_products) %>%  -->
+<!--   summarise(N = sum(N)) %>%  -->
+<!--   ungroup() %>%  -->
+<!--   mutate(perc = N/sum(N)*100,  -->
+<!--          other = c("1"))# %>%  -->
+<!--   #mutate(Time = factor(Time_server_vs_local,  -->
+<!--   #levels = c( "100% server","60% - 80% server","40% - 60% server", -->
+<!--   #            "20% - 40% server","Less than 20% on the sever","100% locally")))  -->
+
+<!-- dat6 %>% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+ -->
+<!--    ggplot2::geom_bar(stat = "identity", width = 1,color="white")+ -->
+<!--   ggplot2::coord_polar("y", start = 0)+ -->
+<!--   #  ggplot2::ggplot()+ -->
+<!--   #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+ -->
+<!--   ggplot2::ggtitle("Would your benefit from a public facing shiny server?")+ -->
+<!--   ggplot2::ylab(element_blank())+ -->
+<!--   ggplot2::xlab(element_blank())+ -->
+<!--   #ggplot2::geom_text(aes(x = other, y = perc, fill = Public_products, label = paste0(round(perc),"%")),  -->
+<!--   #      position = position_stack(vjust = 0.5))+ -->
+
+<!--   theme_void()+ -->
+<!--   ggplot2::geom_text(aes(x = "", y = N, fill = Public_products, label = paste0(round(perc),"%")),  -->
+<!--         position = position_stack(vjust = 0.5),  -->
+<!--         color = "white")+ -->
+<!--     ggplot2::theme(legend.title = element_blank()) + -->
+<!--   ecodata::theme_ts() -->
+<!-- ``` -->
+
+```{r, echo = FALSE, message = FALSE, warning=FALSE, out.width="100%"}
 dat8<- dat2 %>% 
   select(server_vs_connect) %>% 
   filter(!server_vs_connect == "", 
@@ -331,27 +328,30 @@ dat8<- dat2 %>%
 
 dat8 %>% ggplot2::ggplot()+
    ggplot2::geom_col(aes(x = other, y = perc, fill = server_vs_connect))+
+  ggplot2::coord_polar("y", start = 0)+
   #  ggplot2::ggplot()+
   #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+
-  ggplot2::ggtitle("RStudio Connect vs Public facing shiny sevrer")+
+  theme_void()+
+  ggplot2::geom_text(aes(x = other, y = perc, fill = server_vs_connect, label = paste0(round(perc),"%")), 
+        position = position_stack(vjust = 0.5), 
+        color = "white")+
+  ggplot2::ggtitle("RStudio Connect vs Public Shiny Server")+
   ggplot2::ylab("Percent of participants")+
   ggplot2::xlab(element_blank())+
-  ggplot2::geom_text(aes(x = other, y = perc, fill = server_vs_connect, label = paste0(round(perc),"%")), 
-        position = position_stack(vjust = 0.5))+
   ggplot2::theme(legend.title = element_blank(), 
                  axis.text.x=element_blank()) +
   ecodata::theme_ts()
 
 ```
+
 ---
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
-## How to support this interest 
+## How to support this interest: Trainings
 
-### Training
-
+### R users are interested in training on more advanced R topics. 
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
 dat9<-dat2 %>% dplyr::select(rbasic, shiny, shinyserver, rstudioconnect, rforreporting, other) %>% 
@@ -397,10 +397,18 @@ background-position: right
 # Summary
 
 - Lots of R use at the NEFSC
- - Interest in further training and support
-- Opportunites to enhance NEFSC work with shiny
+ - Interest in further training and support for R commmunity
+- Opportunites to enhance NEFSC work with public shiny
+  - Stakeholder Engagement
+  - Better Science
+  - Further Education
 - Support Required
  - Public facing tool to host shiny apps
- - Training in shiny and current tools
+ - Training in shiny and related tools
  
+ 
+## Find more on us 
+- Shiny user group
+- Current apps in development - [shiny-book](https://github.com/NEFSC/READ-shiny-book)
+
 

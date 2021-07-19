@@ -4,6 +4,7 @@
     <title>NEFSC Shiny Survey</title>
     <meta charset="utf-8" />
     <meta name="author" content="NEFSC R Shiny Group" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="libs/EDAB_theme.css" type="text/css" />
   </head>
@@ -50,10 +51,11 @@ background-position: right
 
 ## Survey Findings
 
-### This survey recieved 82 responses from 21 branches. 
-
+### This survey recieved 82 responses from 16 different NEFSC Branches. 
+- Lots of R users at the center.
 
 &lt;img src="survey_presentation_files/figure-html/unnamed-chunk-2-1.png" width="720" /&gt;
+
 
 ---
 background-image: url("EDAB_images/background4.png")
@@ -95,62 +97,85 @@ background-position: right
 
 ## Survey Findings
 
-### How are folks currently using R 
+### Most folks using R for Stats, Data Wrangling and Visualization. 
+- Fewer folks using R for Reporting. 
+- This is reflected in training interests slide XX. 
 
 &lt;img src="survey_presentation_files/figure-html/unnamed-chunk-6-1.png" width="720" /&gt;
 
----
-background-image: url("EDAB_images/background4.png")
-background-size: 1200px 
-background-position: right
 
-## Survey Findings
+---
+
+## Shiny Ideas
 
 ### Expanding NEFSC work with public shiny
-
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-7-1.png" width="720" /&gt;
-
-
----
-
-background-image: url("docs/EDAB_images/Shiny_Ideas1.png")
-background-size: 1000px 
-background-position: center
-
-## Shiny Ideas
-
-
+- Lots of ideas for advancing NEFSC work 
+- Some already underway*
+&lt;img src="EDAB_images/Shiny_Ideas1.png" width="100%" /&gt;
 
 ---
 
-background-image: url("EDAB_images/Shiny_Ideas2.png")
-background-size: 1000px 
-background-position: center
-
 ## Shiny Ideas
 
+### Ideas that improve stakeholder engagement, science, and outreach.  
+- Some already underway*
+&lt;img src="EDAB_images/Shiny_Ideas2.png" width="100%" /&gt;
 ---
 
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
-## How to support this interest
+## How to support this interest: Public Shiny
 
-### Shiny vs RStudio Connect
+### **63%** of participants have work that would benefit from a public shiny instance.
+- Most survey participants would like more information about the options. 
 
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-8-1.png" width="720" /&gt;
+&lt;!-- ```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.height= 5} --&gt;
+&lt;!-- dat6&lt;- dat2 %&gt;%  --&gt;
+&lt;!--   select(Public_products) %&gt;%  --&gt;
+&lt;!--   filter(!Public_products == "") %&gt;%  --&gt;
+&lt;!--   mutate(N = c(1)) %&gt;%  --&gt;
+&lt;!--   group_by(Public_products) %&gt;%  --&gt;
+&lt;!--   summarise(N = sum(N)) %&gt;%  --&gt;
+&lt;!--   ungroup() %&gt;%  --&gt;
+&lt;!--   mutate(perc = N/sum(N)*100,  --&gt;
+&lt;!--          other = c("1"))# %&gt;%  --&gt;
+&lt;!--   #mutate(Time = factor(Time_server_vs_local,  --&gt;
+&lt;!--   #levels = c( "100% server","60% - 80% server","40% - 60% server", --&gt;
+&lt;!--   #            "20% - 40% server","Less than 20% on the sever","100% locally")))  --&gt;
+
+&lt;!-- dat6 %&gt;% ggplot2::ggplot(aes(x = "", y = N, fill = Public_products))+ --&gt;
+&lt;!--    ggplot2::geom_bar(stat = "identity", width = 1,color="white")+ --&gt;
+&lt;!--   ggplot2::coord_polar("y", start = 0)+ --&gt;
+&lt;!--   #  ggplot2::ggplot()+ --&gt;
+&lt;!--   #ggplot2::geom_col(aes( y = Var, x = Value,  fill = Category))+ --&gt;
+&lt;!--   ggplot2::ggtitle("Would your benefit from a public facing shiny server?")+ --&gt;
+&lt;!--   ggplot2::ylab(element_blank())+ --&gt;
+&lt;!--   ggplot2::xlab(element_blank())+ --&gt;
+&lt;!--   #ggplot2::geom_text(aes(x = other, y = perc, fill = Public_products, label = paste0(round(perc),"%")),  --&gt;
+&lt;!--   #      position = position_stack(vjust = 0.5))+ --&gt;
+
+&lt;!--   theme_void()+ --&gt;
+&lt;!--   ggplot2::geom_text(aes(x = "", y = N, fill = Public_products, label = paste0(round(perc),"%")),  --&gt;
+&lt;!--         position = position_stack(vjust = 0.5),  --&gt;
+&lt;!--         color = "white")+ --&gt;
+&lt;!--     ggplot2::theme(legend.title = element_blank()) + --&gt;
+&lt;!--   ecodata::theme_ts() --&gt;
+&lt;!-- ``` --&gt;
+
+&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+
 ---
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
-## How to support this interest 
+## How to support this interest: Trainings
 
-### Training
+### R users are interested in training on more advanced R topics. 
 
-
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-9-1.png" width="720" /&gt;
+&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-10-1.png" width="720" /&gt;
 
 ---
 background-image: url("EDAB_images/background4.png")
@@ -160,11 +185,21 @@ background-position: right
 # Summary
 
 - Lots of R use at the NEFSC
- - Interest in further training and support
-- Opportunites to enhance NEFSC work with shiny
+ - Interest in further training and support for R commmunity
+- Opportunites to enhance NEFSC work with public shiny
+  - Stakeholder Engagement
+  - Better Science
+  - Further Education
 - Support Required
  - Public facing tool to host shiny apps
- - Training in shiny and current tools
+ - Training in shiny and related tools
+ 
+ 
+## Find more on us 
+- Shiny user group
+- Current apps in development - [shiny-book](https://github.com/NEFSC/READ-shiny-book)
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
