@@ -252,6 +252,7 @@ dat2 %>% dplyr::select(StatisticalAnalysis, Reporting, DataQAQC, Wrangling, Visu
 ### Expanding NEFSC work with public shiny
 - Lots of ideas for advancing NEFSC work 
 - Some already underway*
+
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
 knitr::include_graphics("EDAB_images/Shiny_Ideas1.png")
 ```
@@ -263,9 +264,11 @@ knitr::include_graphics("EDAB_images/Shiny_Ideas1.png")
 
 ### Ideas that improve stakeholder engagement, science, and outreach.  
 - Some already underway*
+
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "100%"}
 knitr::include_graphics("EDAB_images/Shiny_Ideas2.png")
 ```
+
 ---
 
 background-image: url("EDAB_images/background4.png")
