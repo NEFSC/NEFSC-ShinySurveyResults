@@ -19,7 +19,7 @@ output:
 class: top, left
 
 ```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
+options(htmltools.dir.version = FALSE, htmltools.preserve.raw = FALSE)
 knitr::opts_chunk$set(echo = F,
                       fig.retina = 3,
                       #fig.width = 4,
