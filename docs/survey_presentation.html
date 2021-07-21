@@ -7,6 +7,8 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link rel="stylesheet" href="libs/EDAB_theme.css" type="text/css" />
+    <link rel="stylesheet" href="libs/cols.css" type="text/css" />
+    <link rel="stylesheet" href="https:/cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css" />
   </head>
   <body>
     <textarea id="source">
@@ -56,8 +58,8 @@ background-position: right
 
 &lt;img src="survey_presentation_files/figure-html/unnamed-chunk-2-1.png" width="720" /&gt;
 
-
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
@@ -69,24 +71,48 @@ background-position: right
 &lt;img src="EDAB_images/DivisionPie.jpg" width="50%" /&gt;&lt;img src="EDAB_images/READBranchPie.jpg" width="50%" /&gt;
 
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
 ## Survey Findings
 
-### Programming software in use @NEFSC
+- Survey respondents were placed into 3 categories based on whether they didn't regularly use a programming language (no main software), they used a single programming language (1 main software), or they used more than one programming language (1+ main software)
 
-&lt;img src="EDAB_images/main_software.png" width="75%" /&gt;
+![:col_header No main software, 1 main software, 1+ main software]
+![:col_row 
+    &lt;span style="font-size: 5em; color: #625BC4;"&gt;&lt;/span&gt;,
+    
+    &lt;span style="font-size: 5em; color: #625BC4;"&gt;&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;&lt;/span&gt;,
+    
+    &lt;span style="font-size: 5em; color: #625BC4;"&gt;&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;&lt;/span&gt;]
+![:col_row 
+    &lt;span style="font-size: 3.5em; color: #625BC4;"&gt;&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;
+    &lt;img style="height: 2em;" src="EDAB_images/matlab.png"&gt;&lt;br&gt;
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;SAS&lt;/span&gt;,
+    
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;C++&lt;/span&gt;&lt;br&gt;
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;IDL&lt;/span&gt;&lt;br&gt;
+    &lt;img style="height: 2em;" src="EDAB_images/matlab.png"&gt;&lt;br&gt;
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;&lt;i class="fab fa-python"&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;&lt;i class="fab fa-r-project"&gt;&lt;/i&gt;&lt;/span&gt;&lt;br&gt;
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;SAS&lt;/span&gt;,
 
+    &lt;span style="font-size: 2em; color: #625BC4;"&gt;IDL&lt;/span&gt;&lt;br&gt;
+    &lt;img style="height: 2em;" src="EDAB_images/matlab.png"&gt;]
+    
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
 ## Survey Findings
 
-### If an R user, what other programming software was used?
+### If an &lt;i class="fab fa-r-project"&gt;&lt;/i&gt; user, what other programming software was used?
+
+- SAS followed by C++, Matlab, Python, and Other
 
 &lt;img src="EDAB_images/r_main_else.png" width="75%" /&gt;
 
@@ -101,7 +127,7 @@ background-position: right
 - Fewer folks using R for Reporting. 
 - This is reflected in training interests slide XX. 
 
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-6-1.png" width="720" /&gt;
+&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-5-1.png" width="720" /&gt;
 
 
 ---
@@ -168,7 +194,7 @@ background-position: right
 &lt;!--   ecodata::theme_ts() --&gt;
 &lt;!-- ``` --&gt;
 
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-9-1.png" width="100%" /&gt;
+&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
 
 ---
 background-image: url("EDAB_images/background4.png")
@@ -179,7 +205,7 @@ background-position: right
 
 ### R users are interested in training on more advanced R topics. 
 
-&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-10-1.png" width="720" /&gt;
+&lt;img src="survey_presentation_files/figure-html/unnamed-chunk-9-1.png" width="720" /&gt;
 
 ---
 background-image: url("EDAB_images/background4.png")
@@ -207,8 +233,9 @@ background-position: right
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="libs/cols_macros.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "githubp",
+"highlightStyle": "github",
 "highlightLines": true,
 "countIncrementalSlides": false
 });

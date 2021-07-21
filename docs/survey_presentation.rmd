@@ -4,11 +4,12 @@ subtitle: "Results and Next Steps"
 author: "NEFSC R Shiny Group"
 output:
   xaringan::moon_reader:
-    css: ["default", "libs/EDAB_theme.css"]
+    css: ["default", "libs/EDAB_theme.css", "libs/cols.css", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"]
     lib_dir: libs
     nature:
+      beforeInit: "libs/cols_macros.js" 
       titleSlideClass: ["right", "middle", "my-title"]
-      highlightStyle: githubp
+      highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
   revealjs::revealjs_presentation:
@@ -165,8 +166,8 @@ dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_u
 
 ```
 
-
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
@@ -181,26 +182,48 @@ knitr::include_graphics("EDAB_images/READBranchPie.jpg")
 ```
 
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
 ## Survey Findings
 
-### Programming software in use @NEFSC
+- Survey respondents were placed into 3 categories based on whether they didn't regularly use a programming language (no main software), they used a single programming language (1 main software), or they used more than one programming language (1+ main software)
 
-```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "75%"}
-knitr::include_graphics("EDAB_images/main_software.png")
-```
+![:col_header No main software, 1 main software, 1+ main software]
+![:col_row 
+    <span style="font-size: 5em; color: #625BC4;"></span>,
+    
+    <span style="font-size: 5em; color: #625BC4;"><i class="fab fa-r-project"></i></span>,
+    
+    <span style="font-size: 5em; color: #625BC4;"><i class="fab fa-r-project"></i></span>]
+![:col_row 
+    <span style="font-size: 3.5em; color: #625BC4;"><i class="fab fa-r-project"></i></span><br>
+    <img style="height: 2em;" src="EDAB_images/matlab.png"><br>
+    <span style="font-size: 2em; color: #625BC4;">SAS</span>,
+    
+    <span style="font-size: 2em; color: #625BC4;">C++</span><br>
+    <span style="font-size: 2em; color: #625BC4;">IDL</span><br>
+    <img style="height: 2em;" src="EDAB_images/matlab.png"><br>
+    <span style="font-size: 2em; color: #625BC4;"><i class="fab fa-python"></i></span><br>
+    <span style="font-size: 2em; color: #625BC4;"><i class="fab fa-r-project"></i></span><br>
+    <span style="font-size: 2em; color: #625BC4;">SAS</span>,
 
+    <span style="font-size: 2em; color: #625BC4;">IDL</span><br>
+    <img style="height: 2em;" src="EDAB_images/matlab.png">]
+    
 ---
+
 background-image: url("EDAB_images/background4.png")
 background-size: 1200px 
 background-position: right
 
 ## Survey Findings
 
-### If an R user, what other programming software was used?
+### If an <i class="fab fa-r-project"></i> user, what other programming software was used?
+
+- SAS followed by C++, Matlab, Python, and Other
 
 ```{r,echo = FALSE, message = FALSE, warning = FALSE, out.width = "75%"}
 knitr::include_graphics("EDAB_images/r_main_else.png")
