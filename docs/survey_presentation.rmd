@@ -99,7 +99,7 @@ dat2<-dat %>%
 
 ```
 
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -120,7 +120,7 @@ background-position: right
 
 
 ---
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -168,7 +168,7 @@ dat2 %>% dplyr::select(R_users, Py_users, Mat_users, IDL_users, SAS_users, Cpp_u
 
 ---
 
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -183,7 +183,7 @@ knitr::include_graphics("EDAB_images/READBranchPie.jpg")
 
 ---
 
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -215,7 +215,7 @@ background-position: right
     
 ---
 
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -230,7 +230,7 @@ knitr::include_graphics("EDAB_images/r_main_else.png")
 ```
 
 ---
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -294,7 +294,7 @@ knitr::include_graphics("EDAB_images/Shiny_Ideas2.PNG")
 
 ---
 
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -372,7 +372,7 @@ dat8 %>% ggplot2::ggplot()+
 ```
 
 ---
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
@@ -417,7 +417,7 @@ dat9 %>%   ggplot2::ggplot()+
 ```
 
 ---
-background-image: url("EDAB_images/background4.PNG")
+background-image: url("EDAB_images/background2.png")
 background-size: 1200px 
 background-position: right
 
