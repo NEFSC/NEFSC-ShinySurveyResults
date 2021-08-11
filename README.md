@@ -1,3 +1,7 @@
 # NEFSC Shiny Group Survey Results 
 
 This repo contains processed survey data from the R Shiny Group Survey conducted in June 2021 at the Northeast Fisheries Science Center. 
+
+The R Shiny group (https://github.com/NEFSC/Shiny-User-Group) gathers bi-weekly to discuss all things Shiny and developed this survey to gain a better understanding of how and where people are using R in their work, to identify common bottlenecks and areas where we can further support each other, and to highlight the need for public facing tool to host shiny apps.
+
+*This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project code is provided on an ‘as is’ basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.*
