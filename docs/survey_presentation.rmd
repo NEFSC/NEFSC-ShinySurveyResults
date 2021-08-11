@@ -336,6 +336,7 @@ background-position: right
 ## How to support this interest: Trainings
 
 ### R users are interested in training on more advanced R topics. 
+* ~75% Interested/Super Insterested 
 
 ```{r, echo = FALSE, message = FALSE, warning=FALSE, fig.width=10}
 dat9<-dat2 %>% dplyr::select(rbasic, shiny, shinyserver, rstudioconnect, rforreporting, other) %>% 
@@ -382,17 +383,31 @@ background-position: right
 
 - Lots of R use at the NEFSC
  - Interest in further training and support for R commmunity
+
 - Opportunites to enhance NEFSC work with public shiny
   - Stakeholder Engagement
   - Better Science
   - Further Education
+  
 - Support Required
  - Public facing tool to host shiny apps
  - Training in shiny and related tools
  
- 
-## Find more on us 
-- More about the R Shiny group - [Shiny-User-Group](https://github.com/NEFSC/Shiny-User-Group)
-- Current apps in development - [shiny-book](https://nefsc.github.io/READ-shiny-book/)
+---
 
+# Action Items
+- Explore Rstudio Connect v public shiny server
+- Plan training for how to use the chosen tool
 
+# For more on us
+* More about the R Shiny group - [Shiny-User-Group](https://github.com/NEFSC/Shiny-User-Group)
+* Current apps in development - [shiny-book](https://nefsc.github.io/NEFSC-shiny-book/)
+
+<br />
+<br />
+<br />
+<br />
+
+.contrib[
+Contact: <kimberly.bastille@noaa.gov>
+]
